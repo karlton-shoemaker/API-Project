@@ -8,8 +8,39 @@
     <title>Grammar Nonsense</title>
 </head>
 <body>
-    <p id="test">Test</p>
+    <header>
+        <h1>Grammar Looker-Upper</h1>
+    </header>
+    <main>
+    <section class="display">
+        <div id="exampleWord"></div>
+        <div id="exampleTranscription"></div>
+        <div id="exampleAlphabet"></div>
+        <div id="examplePartOfSpeech"></div>
+        <div>Definition: </div>
+        <div id="exampleDefinition"></div>
+        <div id="examplePronunciation"></div>
+    </section>
+    <br>
+    <section id="search">
+        <input id="searchTerm" type="text" placeholder="Search a Word!">
+        <button id="searchBtn">Search Word</button>
+    </section>
+    <br>
+    <section class="display" id="searchBlock">
+        <div id="searchWord"></div>
+        <div id="searchTranscription"></div>
+        <div id="searchAlphabet"></div>
+        <div id="searchPartOfSpeech"></div>
+        <div>Definition: </div>
+        <div id="searchDefinition"></div>
+        <div id="searchPronunciation"></div>
+    </section>
+    <br>
+    </main>
+    <footer>
+        &copy; 2021 Karlton Shoemaker
+    </footer>
 </body>
-<!-- <script type="module" src="Helpers/helper.js"></script> -->
 <script src="app.js"></script>
 </html>
