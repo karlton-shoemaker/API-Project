@@ -1,5 +1,6 @@
-let test = document.getElementById("test");
-test.style.color = "brown";
+let dataOutput;
+let example = "example";
+let search = "search";
 
 function dataFromAPI(data){
     let word = data.entries[0].entry;
@@ -13,7 +14,25 @@ function dataFromAPI(data){
     return wordCharacteristics;
 }
 
-fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/food`, {
+//To Do:
+//When creating the search ids, put the word 'search' in front of all names
+//so that I can string interpolate the names 
+function displayData(dataOutput, id){
+    let displayWord = document.getElementById(`${id}Word`);
+    displayWord.innerText = dataOutput[0];
+    let displayDefinition = document.getElementById(`${id}Definition`);
+    displayDefinition.innerText = dataOutput[1];
+    let displayPartOfSpeech = document.getElementById(`${id}PartOfSpeech`);
+    displayPartOfSpeech.innerText = dataOutput[3];
+    let displayTranscription = document.getElementById(`${id}Transcription`);
+    displayTranscription.innerText = dataOutput[5];
+    let displayAlphabet = document.getElementById(`${id}Alphabet`);
+    displayAlphabet.innerText = dataOutput[6];
+    let displayPronunciation = document.getElementById(`${id}Pronunciation`);
+    displayPronunciation.innerText = dataOutput[2];
+}
+
+fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/filthy`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "5528b23ad4msha4ad47087d0d6e0p1bd980jsn5eefe831977c",
@@ -23,8 +42,32 @@ fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/food`, {
 .then(response => response.json())
 .then(data => {
 	console.log(data);
-    test.innerText = dataFromAPI(data);
+    dataOutput = dataFromAPI(data);
+    console.log(dataOutput);
+    displayData(dataOutput, example);
 })
 .catch(err => {
 	console.error(err);
 });
+
+function searchAPI(searchTerm){
+    fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "5528b23ad4msha4ad47087d0d6e0p1bd980jsn5eefe831977c",
+		"x-rapidapi-host": "lingua-robot.p.rapidapi.com"
+	}
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+    dataOutput = dataFromAPI(data);
+    console.log(dataOutput);
+    displayData(dataOutput, search);
+})
+.catch(err => {
+    console.error(err);
+});
+}
+
+searchAPI("food");
