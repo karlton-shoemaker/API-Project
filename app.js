@@ -1,6 +1,7 @@
 let dataOutput;
 let example = "example";
 let search = "search";
+let searchInput = document.getElementById('searchTerm');
 
 function dataFromAPI(data){
     let word = data.entries[0].entry;
@@ -32,7 +33,7 @@ function displayData(dataOutput, id){
     displayPronunciation.innerText = dataOutput[2];
 }
 
-fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/filthy`, {
+fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/food`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "5528b23ad4msha4ad47087d0d6e0p1bd980jsn5eefe831977c",
@@ -70,4 +71,13 @@ function searchAPI(searchTerm){
 });
 }
 
-searchAPI("food");
+// searchAPI("food");
+
+let searchButton = document.getElementById('searchBtn');
+searchButton.addEventListener('click', function(){
+    let inputVal = searchInput.value;
+    console.log(inputVal);
+    searchAPI(inputVal);
+    let showResult = document.getElementById('searchBlock');
+    showResult.style.display = "block";
+})
