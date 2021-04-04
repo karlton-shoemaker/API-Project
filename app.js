@@ -77,6 +77,8 @@ fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`
     console.log(data);
     dataOutput = dataFromAPI(data);
     console.log(dataOutput);
+    //console.log(dataOutput[4]);
+    profanityChecker(dataOutput[4]);
     displayData(dataOutput, search);
 })
 .catch(err => {
@@ -91,6 +93,19 @@ searchButton.addEventListener('click', function(){
     let inputVal = searchInput.value;
     console.log(inputVal);
     searchAPI(inputVal);
-    let showResult = document.getElementById('searchBlock');
-    showResult.style.display = "block";
 })
+
+function profanityChecker(profanityCheck){
+    profanityCheck.forEach(element => {
+        let showResult = document.getElementById('searchBlock');
+        if(element == "vulgar"){
+            //console.log("this was vulgar");
+            // let showResult = document.getElementById('searchBlock');
+            showResult.style.display = "none";
+            alert("Hey! This is a family site! Go look up your profanity elsewhere!");
+        }
+        else{
+            showResult.style.display = "block";
+        }
+    });
+}
