@@ -6,7 +6,13 @@ let searchInput = document.getElementById('searchTerm');
 function dataFromAPI(data){
     let word = data.entries[0].entry;
     let definition = data.entries[0].lexemes[0].senses[0].definition;
-    let pronunciation = data.entries[0].pronunciations[0].audio.url;
+    let pronunciation;
+    if(data.entries[0].pronunciations[0].audio == null){
+        pronunciation = "No pronunciation found."
+    }
+    else{
+        pronunciation = data.entries[0].pronunciations[0].audio.url;
+    }
     let partOfSpeech = data.entries[0].lexemes[0].partOfSpeech;
     let profanityCheck = data.entries[0].lexemes[0].senses[0].labels;
     let transcription = data.entries[0].pronunciations[0].transcriptions[0].transcription;
@@ -52,7 +58,7 @@ fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/food`, {
 });
 
 function searchAPI(searchTerm){
-    fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`, {
+fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "5528b23ad4msha4ad47087d0d6e0p1bd980jsn5eefe831977c",
