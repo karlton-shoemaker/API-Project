@@ -36,7 +36,14 @@ function displayData(dataOutput, id){
     let displayAlphabet = document.getElementById(`${id}Alphabet`);
     displayAlphabet.innerText = dataOutput[6];
     let displayPronunciation = document.getElementById(`${id}Pronunciation`);
-    displayPronunciation.innerText = dataOutput[2];
+    let pronunciationLink = document.getElementById(`${id}PronunciationLink`);
+    if(dataOutput[2] == "No pronunciation found."){
+        displayPronunciation.innerText = "No pronunciation found."
+    }
+    else{
+        displayPronunciation.innerText = "Pronunciation";
+        pronunciationLink.href = dataOutput[2];
+    }
 }
 
 fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/food`, {
