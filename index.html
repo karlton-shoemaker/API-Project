@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>le petit dictionnaire</title>
+</head>
+<body>
+    <header>
+        <h1>le petit dictionnaire</h1>
+    </header>
+    <main>
+        <section id="about">
+            <div>Welcome to le petit dictionnaire! This site allows you to look up English words and shows some basic dictionary-type info about them. You can see the phonetic spelling, part of speech, definition, and pronunciation (not available on all words). We take our name from French because we are slightly pretentious. See below for an example:</div>
+        </section>
+        <br>
+        <section class="display">
+            <div id="exampleWord"></div>
+            <div id="exampleTranscription"></div>
+            <div id="exampleAlphabet"></div>
+            <i><div id="examplePartOfSpeech"></div></i>
+            <div id="exampleText">Definition: </div>
+            <div id="exampleDefinition"></div>
+            <a id="examplePronunciationLink" target="_blank"><div id="examplePronunciation"></div></a>
+        </section>
+        <br>
+        <section id="search">
+            <input id="searchTerm" type="text" placeholder="Search a Word!">
+            <button id="searchBtn">Search Word</button>
+        </section>
+        <br>
+        <section class="display" id="searchBlock">
+            <div id="searchWord"></div>
+            <div id="searchTranscription"></div>
+            <div id="searchAlphabet"></div>
+            <i><div id="searchPartOfSpeech"></div></i>
+            <div id="searchText">Definition: </div>
+            <div id="searchDefinition"></div>
+            <a id="searchPronunciationLink" target="_blank"><div id="searchPronunciation"></div></a>
+        </section>
+        <br>
+        <section id="info">
+            <div>The pronunciation is usually notated according to the International Phonetic Alphabet (IPA) unless otherwise noted. For an explanation of the IPA, click <a target="_blank" href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">here</a></div>
+        </section>
+        <br>
+        <section id="documentation">
+            <div>This site was created by leveraging the Lingua Robot API. To see the documentation for it, click <a target="_blank" href="https://linguarobot.docs.apiary.io/">here</a></div>
+        </section>
+    </main>
+    <footer>
+        &copy; 2021 Karlton Shoemaker
+    </footer>
+</body>
+<script src="app.js"></script>
+</html>
