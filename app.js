@@ -6,7 +6,13 @@ let searchInput = document.getElementById('searchTerm');
 function dataFromAPI(data){
     let word = data.entries[0].entry;
     let definition = data.entries[0].lexemes[0].senses[0].definition;
-    let pronunciation = data.entries[0].pronunciations[0].audio.url;
+    let pronunciation;
+    if(data.entries[0].pronunciations[0].audio == null){
+        pronunciation = "No pronunciation found."
+    }
+    else{
+        pronunciation = data.entries[0].pronunciations[0].audio.url;
+    }
     let partOfSpeech = data.entries[0].lexemes[0].partOfSpeech;
     let profanityCheck = data.entries[0].lexemes[0].senses[0].labels;
     let transcription = data.entries[0].pronunciations[0].transcriptions[0].transcription;
@@ -30,7 +36,14 @@ function displayData(dataOutput, id){
     let displayAlphabet = document.getElementById(`${id}Alphabet`);
     displayAlphabet.innerText = dataOutput[6];
     let displayPronunciation = document.getElementById(`${id}Pronunciation`);
-    displayPronunciation.innerText = dataOutput[2];
+    let pronunciationLink = document.getElementById(`${id}PronunciationLink`);
+    if(dataOutput[2] == "No pronunciation found."){
+        displayPronunciation.innerText = "No pronunciation found."
+    }
+    else{
+        displayPronunciation.innerText = "Pronunciation";
+        pronunciationLink.href = dataOutput[2];
+    }
 }
 
 fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/food`, {
@@ -52,7 +65,7 @@ fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/food`, {
 });
 
 function searchAPI(searchTerm){
-    fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`, {
+fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "5528b23ad4msha4ad47087d0d6e0p1bd980jsn5eefe831977c",
@@ -64,6 +77,8 @@ function searchAPI(searchTerm){
     console.log(data);
     dataOutput = dataFromAPI(data);
     console.log(dataOutput);
+    //console.log(dataOutput[4]);
+    profanityChecker(dataOutput[4]);
     displayData(dataOutput, search);
 })
 .catch(err => {
@@ -78,6 +93,19 @@ searchButton.addEventListener('click', function(){
     let inputVal = searchInput.value;
     console.log(inputVal);
     searchAPI(inputVal);
-    let showResult = document.getElementById('searchBlock');
-    showResult.style.display = "block";
 })
+
+function profanityChecker(profanityCheck){
+    profanityCheck.forEach(element => {
+        let showResult = document.getElementById('searchBlock');
+        if(element == "vulgar"){
+            //console.log("this was vulgar");
+            // let showResult = document.getElementById('searchBlock');
+            showResult.style.display = "none";
+            alert("Hey! This is a family site! Go look up your profanity elsewhere!");
+        }
+        else{
+            showResult.style.display = "block";
+        }
+    });
+}
