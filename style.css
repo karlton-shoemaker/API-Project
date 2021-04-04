@@ -1,16 +1,75 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 1px 0px;
 }
 
 body{
-    background-color: chocolate;
+    background-image: url("images/bookcase.jpg");
+    max-width: 60%;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+a{
+    text-decoration: none;
+    color: #706015; 
+}
+
+a:hover{
+    color: #171404;
+}
+
+header, footer{
+    background-color: white;
+}
+
+header{
+    margin-top: 2em;
+    padding-left: 2em;
+    padding-top: 2px;
 }
 
 main{
-    background-color: lightblue;
+    background-color: #dbcf93;
+    padding: 2em;
+}
+
+footer{
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#searchBtn{
+    padding-right: 2px;
 }
 
 #searchBlock{
     display: none;
+}
+
+.display{
+    display: grid;
+    grid-template-columns: 25% 25% auto;
+    grid-template-rows: 1.618em 1.618em auto auto;
+    background-color: #bdb073;
+    padding: 1em;
+}
+
+#exampleText, #searchText{
+    grid-row-start: 3;
+}
+
+#exampleDefinition, #searchDefinition{
+    grid-row-start: 3;
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+
+#examplePronunciationLink, #searchPronunciationLink{
+    grid-row-start: 4;
+    margin-top: 10px;
 }

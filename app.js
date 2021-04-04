@@ -21,9 +21,6 @@ function dataFromAPI(data){
     return wordCharacteristics;
 }
 
-//To Do:
-//When creating the search ids, put the word 'search' in front of all names
-//so that I can string interpolate the names 
 function displayData(dataOutput, id){
     let displayWord = document.getElementById(`${id}Word`);
     displayWord.innerText = dataOutput[0];
@@ -39,6 +36,7 @@ function displayData(dataOutput, id){
     let pronunciationLink = document.getElementById(`${id}PronunciationLink`);
     if(dataOutput[2] == "No pronunciation found."){
         displayPronunciation.innerText = "No pronunciation found."
+        pronunciationLink.href = "javascript: void(0)";
     }
     else{
         displayPronunciation.innerText = "Pronunciation";
@@ -77,7 +75,6 @@ fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`
     console.log(data);
     dataOutput = dataFromAPI(data);
     console.log(dataOutput);
-    //console.log(dataOutput[4]);
     profanityChecker(dataOutput[4]);
     displayData(dataOutput, search);
 })
@@ -85,8 +82,6 @@ fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${searchTerm}`
     console.error(err);
 });
 }
-
-// searchAPI("food");
 
 let searchButton = document.getElementById('searchBtn');
 searchButton.addEventListener('click', function(){
@@ -99,13 +94,11 @@ function profanityChecker(profanityCheck){
     profanityCheck.forEach(element => {
         let showResult = document.getElementById('searchBlock');
         if(element == "vulgar"){
-            //console.log("this was vulgar");
-            // let showResult = document.getElementById('searchBlock');
             showResult.style.display = "none";
             alert("Hey! This is a family site! Go look up your profanity elsewhere!");
         }
         else{
-            showResult.style.display = "block";
+            showResult.style.display = "grid";
         }
     });
 }
