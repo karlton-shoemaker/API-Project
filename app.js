@@ -4,19 +4,48 @@ let search = "search";
 let searchInput = document.getElementById('searchTerm');
 
 function dataFromAPI(data){
-    let word = data.entries[0].entry;
+    let word =data.entries[0].entry;
     let definition = data.entries[0].lexemes[0].senses[0].definition;
     let pronunciation;
-    if(data.entries[0].pronunciations[0].audio == null){
+    if(data.entries[0].pronunciations == null){
         pronunciation = "No pronunciation found."
     }
     else{
-        pronunciation = data.entries[0].pronunciations[0].audio.url;
+        if(data.entries[0].pronunciations[0].audio == null){
+            pronunciation = "No pronunciation found."
+        }
+        else{
+            pronunciation = data.entries[0].pronunciations[0].audio.url;
+        }
     }
     let partOfSpeech = data.entries[0].lexemes[0].partOfSpeech;
     let profanityCheck = data.entries[0].lexemes[0].senses[0].labels;
-    let transcription = data.entries[0].pronunciations[0].transcriptions[0].transcription;
-    let alphabet = data.entries[0].pronunciations[0].transcriptions[0].notation;
+    let transcription;
+    if(data.entries[0].pronunciations == null){
+        transcription = "No transcription found.";
+    }
+    else{
+        if(data.entries[0].pronunciations[0].transcriptions == null)
+        {
+            transcription = "No transcription found.";
+        }
+        else{
+            transcription = data.entries[0].pronunciations[0].transcriptions[0].transcription;
+        }
+    }
+    let alphabet;
+    if(data.entries[0].pronunciations == null){
+        alphabet = "n/a";
+    }
+    else{
+        if(data.entries[0].pronunciations[0].transcriptions == null)
+        {
+            alphabet = "n/a";
+        }
+        else{
+            alphabet = data.entries[0].pronunciations[0].transcriptions[0].notation;
+        }
+    }
     let wordCharacteristics = [word, definition, pronunciation, partOfSpeech, profanityCheck, transcription, alphabet];
     return wordCharacteristics;
 }
